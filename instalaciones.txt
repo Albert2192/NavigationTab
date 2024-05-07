@@ -1,0 +1,3 @@
+Instalar el stack navigation
+
+-> npm install @react-navigation/native-stack

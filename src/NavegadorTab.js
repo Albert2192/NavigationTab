@@ -1,5 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from '@react-navigation/native';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
@@ -7,6 +8,33 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import MensajesPrivados from "./MensajesPrivados";
 import MensajesGrupales from "./MensajesGrupales";
 import Perfil from "./Perfil";
+import Mensajes from "./Mensajes";
+
+const HomeStackNavigator = createNativeStackNavigator();
+
+function MyStack() {
+    return (
+        <HomeStackNavigator.Navigator
+            initialRouteName="Grupo"
+        >
+            <HomeStackNavigator.Screen
+                name="Grupo"
+                component={MensajesGrupales}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <HomeStackNavigator.Screen
+                name="Mensajes"
+                component={Mensajes}
+                options={{
+                    headerBackTitleVisible: false,
+                    headerShown: false
+                }}
+            />
+        </HomeStackNavigator.Navigator>
+    );
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +61,8 @@ function MyTabs() {
             />
             <Tab.Screen
                 name="Grupos"
-                component={MensajesGrupales}
+                component={MyStack}
+                //component={MensajesGrupales}
                 options={{
                     tabBarLabel: "Grupos",
                     tabBarIcon: ({ color, size }) => (
